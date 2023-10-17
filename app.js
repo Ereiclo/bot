@@ -229,8 +229,7 @@ async function renderGraph(args) {
       Availability: true,
     },
   });
-  console.log(options);
-
+  
   let days = options.LastNthDays === true ? 7 : options.LastNthDays;
 
   if (options.Last3Days) {
