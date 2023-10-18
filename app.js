@@ -161,7 +161,6 @@ async function checkAvailability(args) {
       LastNthDays: 7,
     },
   });
-  // console.log(options);
 
   let days = options.LastNthDays === true ? 7 : options.LastNthDays;
 
@@ -173,13 +172,11 @@ async function checkAvailability(args) {
     days = 30;
   }
 
-  // console.log(days);
 
   if (options._.length >= 1) {
     const [moduleName] = options._;
 
     if (modulesNames.includes(moduleName)) {
-      // console.log(options);
 
       const startDate = currentDate.minus({ days: days - 1 });
 
@@ -240,7 +237,6 @@ async function renderGraph(args) {
     days = 30;
   }
 
-  console.log(days);
 
   if (options._.length >= 1) {
     const [moduleName] = options._;
@@ -343,20 +339,7 @@ async function renderGraph(args) {
   }
 }
 
-// scrapDataFromLogs(currentDate.minus({ days: defaultPeriod - 1 }), defaultPeriod, "logs.txt");
-
-// console.log(process.argv);
-// fs.readdir(__dirname,(err,files) => console.log(files))
-// console.log(path.join(__dirname,'./logs.txt'))
-// fs.readFile(path.join(__dirname,'./logs.txt'),(err,data) => {
-//   console.log(new TextDecoder().decode(data));
-
-// });
-// console.log(__dirname);
-
 function verifyHelp(args) {
-  // console.log(args);
-  // console.log(getopts(args, { alias: { help: "h" } }));
   return getopts(args, { alias: { help: "h" } }).help ?? false;
 }
 const [command, ...args] = getopts(process.argv.slice(2), {
@@ -364,7 +347,7 @@ const [command, ...args] = getopts(process.argv.slice(2), {
 })._;
 if (verifyHelp(process.argv.slice(2))) {
   console.log(
-    `Este CLI te permite hacer un resumen de un archivo llamado logs.\nTiene los siguientes comandos:\n\n\tCheckAvailability <modulo>\n\tTe permite ver la disponibilidad del <modulo> (PokeAPI,PokeStats,PokeImages)\n\ten un rango especifico de dias\n\n\topciones:\n\n\t--LastNthDays=<numero>,-N <numero>\n\tTe permite ver la disponibilidad de los ultimos <numero> dias\n\n\t--Last3Days (default)\n\tTe permite ver la disponibilidad de los ultimos 3 dias\n\n\t--Last30Days\n\tTe permite ver la disponibilidad de los ultimos 30 dias\n\t\n\n\tCheckLatency <modulo>\n\tTe permite ver la latencia del <modulo> (PokeAPI,PokeStats,PokeImages)\n\ten un rango especifico de dias\n\n\topciones:\n\n\t--start=mm/dd/yyy, -s mm/dd/yyyy (valor default: ${currentDate.minus({days: defaultPeriod - 1}).toFormat(dateFormat)})\n\tDefine la fecha inicio del resumen\n\n\t--end=mm/dd/yyy, -e mm/dd/yyyy (valor default: ${currentDate.toFormat(dateFormat)})\n\tDefine la fecha fin del resumen\n\n\t\n\n\tRenderGraph <modulo>\n\tTe permite ver el grafico de disponibilidad o latencia \n\tdel <modulo> (PokeAPI,PokeStats,PokeImages)\n\ten un rango especifico de dias\n\n\topciones:\n\n\t--Availability,-V (default)\n\tHace que el grafico muestre la disponibilidad\n\n\t--Latency,-L (default)\n\tHace que el grafico muestre la latencia\n\n\t--LastNthDays=<numero>,-N <numero>\n\tTe permite ver el grafico de los ultimos <numero> dias\n\n\t--Last3Days (default)\n\tTe permite ver el grafico en los ultimos 3 dias\n\n\t--Last30Days\n\tTe permite ver el grafico en los ultimos 30 dias\n`
+    `Este CLI te permite hacer un resumen de un archivo llamado logs.txt.\nTiene los siguientes comandos:\n\n\tCheckAvailability <modulo>\n\tTe permite ver la disponibilidad del <modulo> (PokeAPI,PokeStats,PokeImages)\n\ten un rango especifico de dias\n\n\topciones:\n\n\t--LastNthDays=<numero>,-N <numero>\n\tTe permite ver la disponibilidad de los ultimos <numero> dias\n\n\t--Last3Days (default)\n\tTe permite ver la disponibilidad de los ultimos 3 dias\n\n\t--Last30Days\n\tTe permite ver la disponibilidad de los ultimos 30 dias\n\t\n\n\tCheckLatency <modulo>\n\tTe permite ver la latencia del <modulo> (PokeAPI,PokeStats,PokeImages)\n\ten un rango especifico de dias\n\n\topciones:\n\n\t--start=mm/dd/yyy, -s mm/dd/yyyy (valor default: ${currentDate.minus({days: defaultPeriod - 1}).toFormat(dateFormat)})\n\tDefine la fecha inicio del resumen\n\n\t--end=mm/dd/yyy, -e mm/dd/yyyy (valor default: ${currentDate.toFormat(dateFormat)})\n\tDefine la fecha fin del resumen\n\n\t\n\n\tRenderGraph <modulo>\n\tTe permite ver el grafico de disponibilidad o latencia \n\tdel <modulo> (PokeAPI,PokeStats,PokeImages)\n\ten un rango especifico de dias\n\n\topciones:\n\n\t--Availability,-V (default)\n\tHace que el grafico muestre la disponibilidad\n\n\t--Latency,-L (default)\n\tHace que el grafico muestre la latencia\n\n\t--LastNthDays=<numero>,-N <numero>\n\tTe permite ver el grafico de los ultimos <numero> dias\n\n\t--Last3Days (default)\n\tTe permite ver el grafico en los ultimos 3 dias\n\n\t--Last30Days\n\tTe permite ver el grafico en los ultimos 30 dias\n`
   );
 } else
   switch (command) {
